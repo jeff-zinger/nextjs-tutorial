@@ -2,6 +2,7 @@
 
 import prisma from "@/utils/db";
 import {revalidatePath} from "next/cache";
+import {redirect} from "next/navigation";
 
 export const createTask = async (formData) => {
     const content = formData.get('content')
@@ -11,6 +12,23 @@ export const createTask = async (formData) => {
         }
     })
     revalidatePath('/tasks')
+}
+
+export const createTaskCustom = async (prevState, formData) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    const content = formData.get('content')
+    
+    try {
+        await prisma.task.create({
+            data: {
+                content,
+            }
+        })
+        revalidatePath('/tasks')
+        return {message: "success!"}
+    } catch (e) {
+        return {message: "error..."}
+    }
 }
 
 export const getAllTasks = async () => {
@@ -27,4 +45,29 @@ export const deleteTask = async (formData) => {
         where: {id}
     })
     revalidatePath('/tasks')
+}
+
+export const getTask = async (id)  => {
+  return prisma.task.findUnique({
+      where: {
+          id
+      }
+  })
+}
+
+export const editTask = async (formData) => {
+    const id = formData.get('id')
+    const content = formData.get('content')
+    const completed = formData.get('completed')
+
+    await prisma.task.update({
+        where: {
+            id
+        },
+        data: {
+            content,
+            completed: completed === "on"
+        }
+    })
+    redirect("/tasks")
 }
