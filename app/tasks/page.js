@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskFormCustom from "@/components/TaskFormCustom";
+import TaskFormCustom from "@/components/TaskForm";
 import TaskList from "@/components/TaskList";
 
 const TasksPage = () => {
