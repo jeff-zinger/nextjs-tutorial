@@ -1,6 +1,7 @@
 import React from 'react';
 import TaskFormCustom from "@/components/TaskForm";
 import TaskList from "@/components/TaskList";
+export const dynamic = 'force-dynamic';
 
 const TasksPage = () => {
     return (

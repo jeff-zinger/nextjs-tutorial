@@ -6,7 +6,7 @@ import {redirect} from "next/navigation";
 import {z} from 'zod'
 
 export const createTask = async (prevState, formData) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     const content = formData.get('content')
     const Task = z.object({
         content: z.string().min(5)
@@ -51,7 +51,7 @@ export const getTask = async (id)  => {
 }
 
 export const editTask = async (prevState, formData) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
 
     const id = formData.get('id')
     const content = formData.get('content')
